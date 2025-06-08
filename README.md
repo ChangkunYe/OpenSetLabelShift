@@ -23,7 +23,7 @@ as well as the OpenOOD paper:
 ```
 and other OOD detection papers if you are comparing with.
 
-If you are only interest in the proposed Open Set Label Shift estimation and correction algorithm. The implementation is provided in "OpenSetLabelShift/openood/label_shift/".
+If you are only interest in the proposed Open Set Label Shift estimation and correction algorithm. The implementation is provided in "OpenSetLabelShift/openood/label_shift/" (https://github.com/ChangkunYe/OpenSetLabelShift/tree/main/openood/label_shift).
 ## Requirements
 
 ### Installation
@@ -56,7 +56,7 @@ To test existing models' performance under label shift, adjust the dataset path 
 ```
 bash ./test_OSLS.sh
 ```
-The performance will be printed. Import performance will be recorded in "./results/ood/".
+The performance will be printed. Important performance will be recorded in "./results/ood/" as ".csv" files (folder will be created automatically).
 
 
 ## License
