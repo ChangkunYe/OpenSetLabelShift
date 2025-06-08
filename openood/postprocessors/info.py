@@ -1,0 +1,18 @@
+num_classes_dict = {
+    'cifar10': 10,
+    'cifar100': 100,
+    'imagenet200': 200,
+    'imagenet': 1000,
+    'cifar6_seed1': 6,
+    'mnist6_seed1': 6,
+    'cifar50_seed1': 50,
+    'tin20_seed1': 20,
+    'cifar6_seed2': 6,
+    'mnist6_seed2': 6,
+    'cifar50_seed2': 50,
+    'tin20_seed2': 20,
+    'cifar6_seed3': 6,
+    'mnist6_seed3': 6,
+    'cifar50_seed3': 50,
+    'tin20_seed3': 20,
+}

@@ -1,0 +1,14 @@
+test_subset:
+    name: "LT10r"
+    id:
+        mode: "LT"
+        order: "reverse"
+        imb_factor: 0.1
+    csid:
+        mode: "LT"
+        order: "reverse"
+        imb_factor: 0.1
+    ood:
+        mode: "Reduce"
+        order: "normal"
+        ratio: 1.0

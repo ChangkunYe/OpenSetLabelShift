@@ -1,0 +1,16 @@
+test_subset:
+    name: "Dir1"
+    id:
+        mode: "Dirichlet"
+        order: "normal"
+        dirichlet_alpha: 1.0
+        total_num: 2500
+    csid:
+        mode: "Dirichlet"
+        order: "normal"
+        dirichlet_alpha: 1.0
+        total_num: 2500
+    ood:
+        mode: "Reduce"
+        order: "normal"
+        ratio: 1.0

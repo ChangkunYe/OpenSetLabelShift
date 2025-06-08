@@ -1,0 +1,14 @@
+test_subset:
+    name: "LT50"
+    id:
+        mode: "LT"
+        order: "normal"
+        imb_factor: 0.02
+    csid:
+        mode: "LT"
+        order: "normal"
+        imb_factor: 0.02
+    ood:
+        mode: "Reduce"
+        order: "normal"
+        ratio: 1.0

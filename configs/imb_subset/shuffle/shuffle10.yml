@@ -1,0 +1,14 @@
+test_subset:
+    name: "Shuffle10"
+    id:
+        mode: "LT"
+        order: "random"
+        imb_factor: 0.1
+    csid:
+        mode: "LT"
+        order: "random"
+        imb_factor: 0.1
+    ood:
+        mode: "Reduce"
+        order: "normal"
+        ratio: 1.0

@@ -1,0 +1,14 @@
+test_subset:
+    name: "KnockOut0.3"
+    id:
+        mode: "KnockOut"
+        order: "normal"
+        knockout_ratio: 0.3
+    csid:
+        mode: "KnockOut"
+        order: "normal"
+        knockout_ratio: 0.3
+    ood:
+        mode: "Reduce"
+        order: "normal"
+        ratio: 1.0

@@ -1,0 +1,9 @@
+test_subset:
+    name: "Original"
+    id:
+        mode: "Original"
+    csid:
+        mode: "Original"
+    ood:
+        mode: "Original"
+        ratio: "None"
