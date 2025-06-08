@@ -50,9 +50,9 @@ One Nvidia RTX 2080Ti is sufficient for the training. But it's better to have at
 
 ## Test Label Shift Estimation Model
 
-To test existing models' performance under label shift, adjust the dataset path "$data_path" and checkpoint path "$ckpt_path" in the bash script "./test_batch.sh" and run: 
+To test existing models' performance under label shift, adjust the dataset path "$data_path" and checkpoint path "$ckpt_path" in the bash script "./test_OSLS.sh" and run: 
 ```
-bash ./test_batch.sh
+bash ./test_OSLS.sh
 ```
 
 
