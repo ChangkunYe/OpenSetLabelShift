@@ -13,14 +13,14 @@ machine_rank: 0
 network:
   # checkpoint setting: first load generator then discriminator
   pretrained: True
-  checkpoint: ["/data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_opengan_opengan_e90_lr0.0001_default/s0/best_GNet.ckpt",
-               "/data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_opengan_opengan_e90_lr0.0001_default/s0/best_DNet.ckpt",
+  checkpoint: ["$YOUR_CHECKPOINT_PATH/imagenet200_opengan_opengan_e90_lr0.0001_default/s0/best_GNet.ckpt",
+               "$YOUR_CHECKPOINT_PATH/imagenet200_opengan_opengan_e90_lr0.0001_default/s0/best_DNet.ckpt",
                null]
 
   # load checkpoint for feature extraction network
   backbone:
     pretrained: True
-    checkpoint: "/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt"
+    checkpoint: "$YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt"
 
 pipeline:
   name: test_ood

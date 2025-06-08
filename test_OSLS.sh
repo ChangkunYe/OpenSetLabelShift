@@ -1,19 +1,19 @@
 #!/bin/bash
 export CUDA_VISIBLE_DEVICES=0
 # dataset_name="cifar10"
-# ckpt_path="/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e100_lr0.1_default"
+# ckpt_path="$YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e100_lr0.1_default"
 #noise_gamma=0.2
 
 dataset_name="cifar100"
-ckpt_path="/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default"
+ckpt_path="$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default"
 noise_gamma=0.1
 
 #dataset_name="imagenet200"
-#ckpt_path="/data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_resnet18_224x224_base_e90_lr0.1_default"
+#ckpt_path="$YOUR_CHECKPOINT_PATH/imagenet200_resnet18_224x224_base_e90_lr0.1_default"
 #noise_gamma=0.2
 
 #dataset_name="imagenet"
-#ckpt_path="/data2/u6469845/LOGS/Baselines/OpenOOD/imagenet_resnet50_base_e30_lr0.001_randaugment-2-9"
+#ckpt_path="$YOUR_CHECKPOINT_PATH/imagenet_resnet50_base_e30_lr0.001_randaugment-2-9"
 #noise_gamma=0.2
 
 train_subset="./configs/imb_subset/train_keep_original.yml"

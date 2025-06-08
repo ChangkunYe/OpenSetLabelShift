@@ -7,7 +7,7 @@ seed: 0
 
 dataset:
   # cached features extracted from classifier
-  feat_root: '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_feat_extract_opengan_default/s0'
+  feat_root: '$YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_feat_extract_opengan_default/s0'
 
 num_gpus: 1
 num_workers: 8

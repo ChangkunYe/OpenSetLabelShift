@@ -9,6 +9,6 @@
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar100 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_augmix_e100_lr0.1_no-jsd \
+   --root $YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_augmix_e100_lr0.1_no-jsd \
    --postprocessor msp \
    --save-score --save-csv

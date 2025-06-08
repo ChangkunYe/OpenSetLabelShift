@@ -15,7 +15,7 @@ python main.py \
 configs/networks/resnet18_32x32.yml \
 configs/pipelines/test/feat_extract.yml \
 configs/preprocessors/base_preprocessor.yml \
---network.checkpoint "/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1/best.ckpt" \
+--network.checkpoint "$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1/best.ckpt" \
 --pipeline.extract_target train \
 --merge_option merge \
 --num_workers 8 \

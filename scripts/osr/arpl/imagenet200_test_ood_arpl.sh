@@ -1,8 +1,8 @@
 #!/bin/bash
 # sh scripts/osr/arpl/imagenet200_test_ood_arpl.sh
 
-#     --network.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_arpl_net_arpl_e90_lr0.1/s0/best_NetF.ckpt,
-#     /data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_arpl_net_arpl_e90_lr0.1/s0/best_criterion.ckpt \
+#     --network.checkpoint $YOUR_CHECKPOINT_PATH/imagenet200_arpl_net_arpl_e90_lr0.1/s0/best_NetF.ckpt,
+#     $YOUR_CHECKPOINT_PATH/imagenet200_arpl_net_arpl_e90_lr0.1/s0/best_criterion.ckpt \
 
 # NOTE!!!!
 # need to manually change the checkpoint path in configs/pipelines/test/test_arpl.yml

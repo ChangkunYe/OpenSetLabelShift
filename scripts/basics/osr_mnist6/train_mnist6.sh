@@ -30,4 +30,4 @@ else
     --num_workers 4
 fi
 
-cp /data2/u6469845/LOGS/Baselines/OpenOOD/cifar6_seed5_resnet18_32x32_base_e100_lr0.1_default/best.ckpt ./results/checkpoints/osr/cifar6_seed5.ckpt
+cp $YOUR_CHECKPOINT_PATH/cifar6_seed5_resnet18_32x32_base_e100_lr0.1_default/best.ckpt ./results/checkpoints/osr/cifar6_seed5.ckpt

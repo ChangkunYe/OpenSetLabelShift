@@ -15,4 +15,4 @@ configs/pipelines/test/test_dsvdd.yml \
 configs/preprocessors/base_preprocessor.yml \
 configs/postprocessors/dsvdd.yml \
 --network.pretrained True \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_dsvdd_e100/best.ckpt'
+--network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_dsvdd_e100/best.ckpt'

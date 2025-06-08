@@ -16,7 +16,7 @@
 #    configs/preprocessors/base_preprocessor.yml \
 #    configs/postprocessors/openmax.yml \
 #    --num_workers 8 \
-#    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
+#    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
 #    --mark 0
 
 ############################################
@@ -27,7 +27,7 @@
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar100 \
-   --root '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet32_base_e100_lr0.1_LT100_default' \
+   --root '$YOUR_CHECKPOINT_PATH/cifar100_resnet32_base_e100_lr0.1_LT100_default' \
    --postprocessor openmax \
    --save-score --save-csv \
    --train_subset_config_path './configs/imb_subset/train/train_lt100.yml' \
@@ -36,7 +36,7 @@ python scripts/eval_ood.py \
 
 # python scripts/eval_ood.py \
 #   --id-data cifar100 \
-#   --root '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default' \
+#   --root '$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default' \
 #   --postprocessor openmax \
 #   --save-score --save-csv \
 #   --train_subset_config_path './configs/imb_subset/train_keep_original.yml' \

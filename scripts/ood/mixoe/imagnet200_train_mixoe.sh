@@ -10,7 +10,7 @@ python main.py \
     configs/pipelines/train/train_mixoe.yml \
     configs/preprocessors/base_preprocessor.yml \
     --network.pretrained True \
-    --network.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_resnet18_224x224_base_e90_lr0.1_default/s${SEED}/best.ckpt \
+    --network.checkpoint $YOUR_CHECKPOINT_PATH/imagenet200_resnet18_224x224_base_e90_lr0.1_default/s${SEED}/best.ckpt \
     --optimizer.lr 0.001 \
     --optimizer.num_epochs 10 \
     --dataset.train.batch_size 128 \

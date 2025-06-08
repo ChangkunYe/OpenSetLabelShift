@@ -1,7 +1,7 @@
 import os, sys
 ROOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 sys.path.append(ROOT_DIR)
-DATA_DIR = '/data2/u6469845/Data/'
+DATA_DIR = '$YOUR_DATASET_PATH/'
 import numpy as np
 import pandas as pd
 import argparse

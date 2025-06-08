@@ -19,7 +19,7 @@ python main.py \
     configs/pipelines/train/train_csi.yml \
     configs/preprocessors/base_preprocessor.yml \
     --network.pretrained True \
-    --network.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_csi_net_csi_step1_e100_lr0.1/s${SEED}/best.ckpt \
+    --network.checkpoint $YOUR_CHECKPOINT_PATH/cifar100_csi_net_csi_step1_e100_lr0.1/s${SEED}/best.ckpt \
     --optimizer.num_epochs 100 \
     --dataset.train.batch_size 128 \
     --mode csi_step2 \

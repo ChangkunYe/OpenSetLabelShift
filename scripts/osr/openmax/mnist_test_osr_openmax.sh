@@ -19,5 +19,5 @@ configs/pipelines/test/test_osr.yml \
 configs/preprocessors/base_preprocessor.yml \
 configs/postprocessors/openmax.yml \
 --num_workers 8 \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOODcheckpoints/osr/mnist6_seed1.ckpt' \
+--network.checkpoint '$YOUR_CHECKPOINT_PATHcheckpoints/osr/mnist6_seed1.ckpt' \
 --mark 0

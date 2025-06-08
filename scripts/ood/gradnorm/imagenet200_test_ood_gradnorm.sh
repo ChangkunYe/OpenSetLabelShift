@@ -11,13 +11,13 @@
 # ood
 python scripts/eval_ood.py \
     --id-data imagenet200 \
-    --root /data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_resnet18_224x224_base_e90_lr0.1_default \
+    --root $YOUR_CHECKPOINT_PATH/imagenet200_resnet18_224x224_base_e90_lr0.1_default \
     --postprocessor gradnorm \
     --save-score --save-csv #--fsood
 
 # full-spectrum ood
 python scripts/eval_ood.py \
     --id-data imagenet200 \
-    --root /data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_resnet18_224x224_base_e90_lr0.1_default \
+    --root $YOUR_CHECKPOINT_PATH/imagenet200_resnet18_224x224_base_e90_lr0.1_default \
     --postprocessor gradnorm \
     --save-score --save-csv --fsood

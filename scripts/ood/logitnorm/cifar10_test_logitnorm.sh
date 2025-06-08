@@ -9,6 +9,6 @@
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar10 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_logitnorm_e100_lr0.1_alpha0.04_default \
+   --root $YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_logitnorm_e100_lr0.1_alpha0.04_default \
    --postprocessor msp \
    --save-score --save-csv

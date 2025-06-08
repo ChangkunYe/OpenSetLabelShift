@@ -10,7 +10,7 @@ python main.py \
     configs/networks/resnet18_32x32.yml \
     configs/pipelines/train/train_opengan_feat_extract.yml \
     configs/preprocessors/base_preprocessor.yml \
-    --network.checkpoint "/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default/s${SEED}/best.ckpt" \
+    --network.checkpoint "$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default/s${SEED}/best.ckpt" \
     --seed ${SEED}
 
 # train
@@ -20,7 +20,7 @@ python main.py \
     configs/pipelines/train/train_opengan.yml \
     configs/preprocessors/base_preprocessor.yml \
     configs/postprocessors/opengan.yml \
-    --dataset.feat_root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_feat_extract_opengan_default/s${SEED} \
+    --dataset.feat_root $YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_feat_extract_opengan_default/s${SEED} \
     --network.backbone.pretrained True \
-    --network.backbone.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default/s${SEED}/best.ckpt \
+    --network.backbone.checkpoint $YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default/s${SEED}/best.ckpt \
     --seed ${SEED}

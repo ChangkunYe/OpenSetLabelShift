@@ -6,5 +6,5 @@ python ./scripts/download/download.py \
 	--contents 'checkpoints' \
 	--datasets 'ood_v1.5' \
 	--checkpoints 'ood_v1.5' \
-	--save_dir '/data2/u6469845/LOGS/Baselines/OpenOOD' \
+	--save_dir '$YOUR_CHECKPOINT_PATH' \
 	--dataset_mode 'benchmark'

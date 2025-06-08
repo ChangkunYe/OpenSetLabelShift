@@ -5,12 +5,12 @@ config = [
     [
         'osr_cifar6/cifar6_seed1.yml', 'osr_cifar6/cifar6_seed1_ood.yml',
         'resnet18_32x32',
-        '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_osr_resnet18_32x32_base_e100_lr0.1_default/best_epoch94_acc0.9773.ckpt'
+        '$YOUR_CHECKPOINT_PATH/cifar10_osr_resnet18_32x32_base_e100_lr0.1_default/best_epoch94_acc0.9773.ckpt'
     ],
     [
         'osr_cifar50/cifar50_seed1.yml', 'osr_cifar50/cifar50_seed1_ood.yml',
         'resnet18_32x32',
-        '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_osr_resnet18_32x32_base_e100_lr0.1_default/best.ckpt'
+        '$YOUR_CHECKPOINT_PATH/cifar100_osr_resnet18_32x32_base_e100_lr0.1_default/best.ckpt'
     ],
 ]
 

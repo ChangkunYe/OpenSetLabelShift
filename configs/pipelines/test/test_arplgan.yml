@@ -11,8 +11,8 @@ machine_rank: 0
 
 network:
   pretrained: True
-  checkpoint: ["/data2/u6469845/LOGS/Baselines/OpenOOD/mnist_arpl_gan_arpl_gan_e100_lr0.1/best_NetF.ckpt",
-                "/data2/u6469845/LOGS/Baselines/OpenOOD/mnist_arpl_gan_arpl_gan_e100_lr0.1/best_criterion.ckpt",
+  checkpoint: ["$YOUR_CHECKPOINT_PATH/mnist_arpl_gan_arpl_gan_e100_lr0.1/best_NetF.ckpt",
+                "$YOUR_CHECKPOINT_PATH/mnist_arpl_gan_arpl_gan_e100_lr0.1/best_criterion.ckpt",
                 null,
                 null]
 

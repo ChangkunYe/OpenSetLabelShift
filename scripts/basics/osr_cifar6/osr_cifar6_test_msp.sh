@@ -18,4 +18,4 @@ configs/pipelines/test/test_osr.yml \
 configs/preprocessors/base_preprocessor.yml \
 configs/postprocessors/msp.yml \
 --num_workers 8 \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar6_seed1_resnet18_32x32_base_e100_lr0.1_default/best.ckpt'
+--network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar6_seed1_resnet18_32x32_base_e100_lr0.1_default/best.ckpt'

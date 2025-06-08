@@ -9,6 +9,6 @@
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar10 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_rot_net_rotpred_e100_lr0.1_default \
+   --root $YOUR_CHECKPOINT_PATH/cifar10_rot_net_rotpred_e100_lr0.1_default \
    --postprocessor rotpred \
    --save-score --save-csv

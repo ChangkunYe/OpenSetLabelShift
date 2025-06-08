@@ -8,7 +8,7 @@ from openood.networks import ResNet18_32x32 # just a wrapper around the ResNet
 # load the model
 net = ResNet18_32x32(num_classes=10)
 net.load_state_dict(
-    torch.load('/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt')
+    torch.load('$YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt')
 )
 net.cuda()
 net.eval();
@@ -40,7 +40,7 @@ postprocessor_name = "react"
 evaluator = Evaluator(
     net,
     id_name='cifar10',                     # the target ID dataset
-    data_root='/data2/u6469845/Data/',     # change if necessary
+    data_root='$YOUR_DATASET_PATH/',     # change if necessary
     config_root=None,                      # see notes above
     preprocessor=None,                     # default preprocessing for the target ID dataset
     postprocessor_name=postprocessor_name, # the postprocessor to use

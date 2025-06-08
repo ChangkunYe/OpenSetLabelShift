@@ -15,19 +15,19 @@ dataset:
 
   train:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_largescale/imagenet_1k/
-    imglist_pth: /data2/u6469845/Data/ImageNet/ImageNet_LT_train.txt
+    data_dir: $YOUR_DATASET_PATH/images_largescale/imagenet_1k/
+    imglist_pth: $YOUR_DATASET_PATH/ImageNet/ImageNet_LT_train.txt
     batch_size: 256
     shuffle: True
   val:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_largescale/imagenet_1k/
-    imglist_pth: /data2/u6469845/Data/ImageNet/ImageNet_LT_val.txt
+    data_dir: $YOUR_DATASET_PATH/images_largescale/imagenet_1k/
+    imglist_pth: $YOUR_DATASET_PATH/ImageNet/ImageNet_LT_val.txt
     batch_size: 128
     shuffle: False
   test:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_largescale/imagenet_1k/
-    imglist_pth: /data2/u6469845/Data/ImageNet/ImageNet_LT_test2.txt
+    data_dir: $YOUR_DATASET_PATH/images_largescale/imagenet_1k/
+    imglist_pth: $YOUR_DATASET_PATH/ImageNet/ImageNet_LT_test2.txt
     batch_size: 128
     shuffle: False

@@ -24,7 +24,7 @@ python main.py \
     --dataset.test.batch_size 256 \
     --dataset.val.batch_size 256 \
     --network.pretrained True \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/pretrained_weights/resnet50_imagenet1k_v1.pth' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/pretrained_weights/resnet50_imagenet1k_v1.pth' \
     --merge_option merge
 
 ############################################

@@ -14,5 +14,5 @@ python main.py \
     configs/postprocessors/opengan.yml \
     --num_workers 8 \
     --network.backbone.pretrained True \
-    --network.backbone.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default/s${SEED}/best.ckpt \
+    --network.backbone.checkpoint $YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default/s${SEED}/best.ckpt \
     --seed ${SEED}

@@ -19,5 +19,5 @@ configs/pipelines/test/test_ood.yml \
 configs/preprocessors/base_preprocessor.yml \
 configs/postprocessors/residual.yml \
 --num_workers 8 \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1/best.ckpt' \
+--network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1/best.ckpt' \
 --mark 0

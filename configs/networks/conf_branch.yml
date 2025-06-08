@@ -9,5 +9,5 @@ network:
     num_classes: '@{dataset.num_classes}'
     image_size: '@{dataset.image_size}'
     pretrained: False
-    checkpoint: /data2/u6469845/LOGS/Baselines/OpenOOD/mnist_conf_net_conf_esti/best.pth
+    checkpoint: $YOUR_CHECKPOINT_PATH/mnist_conf_net_conf_esti/best.pth
     num_gpus: '@{num_gpus}'

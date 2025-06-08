@@ -12,8 +12,8 @@ machine_rank: 0
 
 network:
   pretrained: True
-  checkpoint: ["/data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_arpl_net_arpl_e90_lr0.1/s0/best_NetF.ckpt",
-               "/data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_arpl_net_arpl_e90_lr0.1/s0/best_criterion.ckpt"]
+  checkpoint: ["$YOUR_CHECKPOINT_PATH/imagenet200_arpl_net_arpl_e90_lr0.1/s0/best_NetF.ckpt",
+               "$YOUR_CHECKPOINT_PATH/imagenet200_arpl_net_arpl_e90_lr0.1/s0/best_criterion.ckpt"]
 
 pipeline:
   name: test_ood

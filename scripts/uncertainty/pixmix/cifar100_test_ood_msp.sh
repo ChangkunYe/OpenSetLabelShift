@@ -18,7 +18,7 @@ python main.py \
     configs/preprocessors/base_preprocessor.yml \
     configs/postprocessors/msp.yml \
     --num_workers 8 \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_pixmix/s0/best.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_pixmix/s0/best.ckpt' \
     --mark pixmix
 
 ############################################
@@ -29,6 +29,6 @@ python main.py \
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar100 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_pixmix \
+   --root $YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_pixmix \
    --postprocessor msp \
    --save-score --save-csv

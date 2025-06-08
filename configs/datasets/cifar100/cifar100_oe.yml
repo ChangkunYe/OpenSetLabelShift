@@ -5,8 +5,8 @@ dataset:
   split_names: [train, oe, val, test]
   oe:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_classic/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar100/train_tin597.txt
+    data_dir: $YOUR_DATASET_PATH/images_classic/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar100/train_tin597.txt
     batch_size: 256
     shuffle: True
     interpolation: bilinear

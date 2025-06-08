@@ -4,19 +4,19 @@ import os
 config = [
     [
         'osr_cifar6/cifar6_seed1.yml', 'osr_cifar6/cifar6_seed1_osr.yml',
-        'resnet18_32x32', '/data2/u6469845/LOGS/Baselines/OpenOOD/osr/cifar6_seed1.ckpt'
+        'resnet18_32x32', '$YOUR_CHECKPOINT_PATH/osr/cifar6_seed1.ckpt'
     ],
     [
         'osr_cifar50/cifar50_seed1.yml', 'osr_cifar50/cifar50_seed1_osr.yml',
-        'resnet18_32x32', '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar50_seed1.ckpt'
+        'resnet18_32x32', '$YOUR_CHECKPOINT_PATH/cifar50_seed1.ckpt'
     ],
     [
         'osr_tin20/tin20_seed1.yml', 'osr_tin20/tin20_seed1_osr.yml',
-        'resnet18_64x64', '/data2/u6469845/LOGS/Baselines/OpenOOD/osr/tin20_seed1.ckpt'
+        'resnet18_64x64', '$YOUR_CHECKPOINT_PATH/osr/tin20_seed1.ckpt'
     ],
     [
         'osr_mnist6/mnist6_seed1.yml', 'osr_mnist6/mnist6_seed1_osr.yml',
-        'lenet', '/data2/u6469845/LOGS/Baselines/OpenOOD/osr/mnist6_seed1.ckpt'
+        'lenet', '$YOUR_CHECKPOINT_PATH/osr/mnist6_seed1.ckpt'
     ],
 ]
 

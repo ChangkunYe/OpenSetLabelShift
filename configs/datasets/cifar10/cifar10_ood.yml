@@ -12,27 +12,27 @@ ood_dataset:
 
   split_names: [val, nearood, farood]
   val:
-    data_dir: /data2/u6469845/Data/images_classic/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/val_tin.txt
+    data_dir: $YOUR_DATASET_PATH/images_classic/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/val_tin.txt
   nearood:
     datasets: [cifar100, tin]
     cifar100:
-      data_dir: /data2/u6469845/Data/images_classic/
-      imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/test_cifar100.txt
+      data_dir: $YOUR_DATASET_PATH/images_classic/
+      imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/test_cifar100.txt
     tin:
-      data_dir: /data2/u6469845/Data/images_classic/
-      imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/test_tin.txt
+      data_dir: $YOUR_DATASET_PATH/images_classic/
+      imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/test_tin.txt
   farood:
     datasets: [mnist, svhn, texture, place365]
     mnist:
-      data_dir: /data2/u6469845/Data/images_classic/
-      imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/test_mnist.txt
+      data_dir: $YOUR_DATASET_PATH/images_classic/
+      imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/test_mnist.txt
     svhn:
-      data_dir: /data2/u6469845/Data/images_classic/
-      imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/test_svhn.txt
+      data_dir: $YOUR_DATASET_PATH/images_classic/
+      imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/test_svhn.txt
     texture:
-      data_dir: /data2/u6469845/Data/images_classic/
-      imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/test_texture.txt
+      data_dir: $YOUR_DATASET_PATH/images_classic/
+      imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/test_texture.txt
     place365:
-      data_dir: /data2/u6469845/Data/images_classic/
-      imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/test_places365.txt
+      data_dir: $YOUR_DATASET_PATH/images_classic/
+      imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/test_places365.txt

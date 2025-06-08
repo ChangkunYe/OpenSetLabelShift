@@ -15,23 +15,23 @@ dataset:
 
   train:
     dataset_class: ImglistExtraDataDataset
-    data_dir: /data2/u6469845/Data/images_classic/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/train_cifar10.txt
+    data_dir: $YOUR_DATASET_PATH/images_classic/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/train_cifar10.txt
     batch_size: 128
     shuffle: True
-    extra_data_pth: /data2/u6469845/Data/images_classic/cifar10_extra/stylegan_images.npy
-    extra_label_pth: /data2/u6469845/Data/images_classic/cifar10_extra/stylegan_labels.npy
+    extra_data_pth: $YOUR_DATASET_PATH/images_classic/cifar10_extra/stylegan_images.npy
+    extra_label_pth: $YOUR_DATASET_PATH/images_classic/cifar10_extra/stylegan_labels.npy
     extra_percent: 100
     orig_ratio: 0.8
   val:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_classic/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/val_cifar10.txt
+    data_dir: $YOUR_DATASET_PATH/images_classic/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/val_cifar10.txt
     batch_size: 200
     shuffle: False
   test:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_classic/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar10/test_cifar10.txt
+    data_dir: $YOUR_DATASET_PATH/images_classic/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar10/test_cifar10.txt
     batch_size: 200
     shuffle: False

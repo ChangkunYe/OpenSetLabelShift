@@ -11,22 +11,22 @@ dataset:
   num_machines: '@{num_machines}'
   train:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/imagenet/train_imagenet_mos.txt
+    data_dir: $YOUR_DATASET_PATH/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/imagenet/train_imagenet_mos.txt
     batch_size: 256
     shuffle: True
     interpolation: bilinear
   val:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/imagenet/val_imagenet_mos.txt
+    data_dir: $YOUR_DATASET_PATH/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/imagenet/val_imagenet_mos.txt
     batch_size: 256
     shuffle: False
     interpolation: bilinear
   test:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/imagenet/test_imagenet_mos.txt
+    data_dir: $YOUR_DATASET_PATH/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/imagenet/test_imagenet_mos.txt
     batch_size: 256
     shuffle: False
     interpolation: bilinear

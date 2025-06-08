@@ -18,5 +18,5 @@ configs/pipelines/test/test_ood.yml \
 configs/preprocessors/base_preprocessor.yml \
 configs/postprocessors/msp.yml \
 --num_workers 8 \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_cutmix_e100_lr0.1_cutmix/best.ckpt' \
+--network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_cutmix_e100_lr0.1_cutmix/best.ckpt' \
 --mark cutmix

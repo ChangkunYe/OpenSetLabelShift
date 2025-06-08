@@ -16,7 +16,7 @@ python main.py \
     configs/postprocessors/mcd.yml \
     --network.backbone.name resnet18_224x224 \
     --network.pretrained True \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_oe_mcd_mcd_e90_lr0.1_default/s0/last_epoch90_acc0.8410.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/imagenet200_oe_mcd_mcd_e90_lr0.1_default/s0/last_epoch90_acc0.8410.ckpt' \
     --num_workers 8 \
     --evaluator.ood_scheme ${SCHEME} \
     --seed 0

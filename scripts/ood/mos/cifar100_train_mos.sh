@@ -17,7 +17,7 @@ python main.py \
     configs/pipelines/train/train_mos.yml \
     configs/preprocessors/base_preprocessor.yml \
     --network.pretrained True \
-    --network.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default/s${SEED}/best.ckpt \
+    --network.checkpoint $YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default/s${SEED}/best.ckpt \
     --optimizer.num_epochs 30 \
     --merge_option merge \
     --seed ${SEED}

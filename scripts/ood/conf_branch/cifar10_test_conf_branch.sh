@@ -16,7 +16,7 @@ python main.py \
     --network.backbone.name resnet18_32x32 \
     --network.backbone.pretrained False \
     --network.pretrained True \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_conf_branch_net_conf_branch_e100_lr0.1/s0/best.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar10_conf_branch_net_conf_branch_e100_lr0.1/s0/best.ckpt' \
     --mark epoch_100
 
 ############################################
@@ -27,6 +27,6 @@ python main.py \
 # multiple runs
 python scripts/eval_ood.py \
     --id-data cifar10 \
-    --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_conf_branch_net_conf_branch_e100_lr0.1_default \
+    --root $YOUR_CHECKPOINT_PATH/cifar10_conf_branch_net_conf_branch_e100_lr0.1_default \
     --postprocessor conf_branch \
     --save-score --save-csv

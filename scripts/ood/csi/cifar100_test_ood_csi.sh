@@ -19,7 +19,7 @@ python main.py \
     configs/postprocessors/msp.yml \
     configs/preprocessors/base_preprocessor.yml \
     --network.pretrained True \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_csi_net_csi_step2_e100_lr0.1/s0/best.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_csi_net_csi_step2_e100_lr0.1/s0/best.ckpt' \
     --merge_option merge
 
 ############################################
@@ -30,6 +30,6 @@ python main.py \
 # multiple runs
 python scripts/eval_ood.py \
     --id-data cifar100 \
-    --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_csi_net_csi_step2_e100_lr0.1 \
+    --root $YOUR_CHECKPOINT_PATH/cifar100_csi_net_csi_step2_e100_lr0.1 \
     --postprocessor msp \
     --save-score --save-csv

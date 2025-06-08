@@ -14,7 +14,7 @@ python main.py \
     configs/postprocessors/ebo.yml \
     --num_workers 8 \
     --network.pretrained True \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_vos_e100_lr0.1_default/s0/best.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_vos_e100_lr0.1_default/s0/best.ckpt' \
     --mark 0
 
 ############################################
@@ -25,6 +25,6 @@ python main.py \
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar100 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_vos_e100_lr0.1_default \
+   --root $YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_vos_e100_lr0.1_default \
    --postprocessor ebo \
    --save-score --save-csv

@@ -2,5 +2,5 @@ network:
   name: resnet18_64x64
   num_classes: '@{dataset.num_classes}'
   pretrained: False          # set 'True' to load pretrained model
-  checkpoint: /data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e200_lr_0.1/best.ckpt            # ignore if pretrained is false
+  checkpoint: $YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e200_lr_0.1/best.ckpt            # ignore if pretrained is false
   num_gpus: '@{num_gpus}'

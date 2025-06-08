@@ -11,22 +11,22 @@ dataset:
   num_machines: '@{num_machines}'
   train:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_classic/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar100/train_cifar100_mos.txt
+    data_dir: $YOUR_DATASET_PATH/images_classic/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar100/train_cifar100_mos.txt
     batch_size: 128
     shuffle: True
     interpolation: bilinear
   val:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_classic/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar100/val_cifar100_mos.txt
+    data_dir: $YOUR_DATASET_PATH/images_classic/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar100/val_cifar100_mos.txt
     batch_size: 128
     shuffle: False
     interpolation: bilinear
   test:
     dataset_class: ImglistDataset
-    data_dir: /data2/u6469845/Data/images_classic/
-    imglist_pth: /data2/u6469845/Data/benchmark_imglist/cifar100/test_cifar100_mos.txt
+    data_dir: $YOUR_DATASET_PATH/images_classic/
+    imglist_pth: $YOUR_DATASET_PATH/benchmark_imglist/cifar100/test_cifar100_mos.txt
     batch_size: 128
     shuffle: False
     interpolation: bilinear

@@ -8,7 +8,7 @@ python main.py \
     configs/preprocessors/base_preprocessor.yml \
     --network.feat_extract_network.name resnet50 \
     --network.feat_extract_network.pretrained True \
-    --network.feat_extract_network.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/pretrained_weights/resnet50_imagenet1k_v1.pth \
+    --network.feat_extract_network.checkpoint $YOUR_CHECKPOINT_PATH/pretrained_weights/resnet50_imagenet1k_v1.pth \
     --optimizer.lr 0.001 \
     --optimizer.num_epochs 30 \
     --dataset.train.batch_size 128 \

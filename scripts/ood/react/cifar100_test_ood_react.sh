@@ -20,7 +20,7 @@ python main.py \
     --network.pretrained False \
     --network.backbone.name resnet18_32x32 \
     --network.backbone.pretrained True \
-    --network.backbone.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
+    --network.backbone.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
     --num_workers 8 \
     --mark 0
 
@@ -32,6 +32,6 @@ python main.py \
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar100 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_resnet18_32x32_base_e100_lr0.1_default \
+   --root $YOUR_CHECKPOINT_PATH/cifar100_resnet18_32x32_base_e100_lr0.1_default \
    --postprocessor react \
    --save-score --save-csv

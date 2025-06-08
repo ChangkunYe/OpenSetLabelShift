@@ -4,4 +4,4 @@ network:
   num_classes: '@{dataset.num_classes}'
   num_gpus: 1
   pretrained: True
-  checkpoint: '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_dcae_dcae/AE_best_epoch1_roc_auc0.4976.pth'
+  checkpoint: '$YOUR_CHECKPOINT_PATH/cifar10_dcae_dcae/AE_best_epoch1_roc_auc0.4976.pth'

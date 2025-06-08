@@ -19,4 +19,4 @@ configs/preprocessors/base_preprocessor.yml \
 configs/postprocessors/rts.yml \
 --network.backbone.name resnet18_32x32 \
 --num_workers 8 \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_rts_net_rts_e100_lr0.1_default/best_epoch89_acc0.7850.ckpt' \
+--network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_rts_net_rts_e100_lr0.1_default/best_epoch89_acc0.7850.ckpt' \

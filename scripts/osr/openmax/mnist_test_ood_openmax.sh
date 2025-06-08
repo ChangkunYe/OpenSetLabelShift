@@ -16,5 +16,5 @@ configs/pipelines/test/test_ood.yml \
 configs/preprocessors/base_preprocessor.yml \
 configs/postprocessors/openmax.yml \
 --num_workers 8 \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOODcheckpoints/mnist_lenet_acc99.30.ckpt' \
+--network.checkpoint '$YOUR_CHECKPOINT_PATHcheckpoints/mnist_lenet_acc99.30.ckpt' \
 --mark 0

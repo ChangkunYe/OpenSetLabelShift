@@ -18,7 +18,7 @@ python main.py \
     configs/preprocessors/base_preprocessor.yml \
     configs/postprocessors/msp.yml \
     --num_workers 8 \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_oe_udg_udg_e100_lr0.1_default/s0/best.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar10_oe_udg_udg_e100_lr0.1_default/s0/best.ckpt' \
     --mark 0
 
 ############################################
@@ -29,6 +29,6 @@ python main.py \
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar10 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_oe_udg_udg_e100_lr0.1_default \
+   --root $YOUR_CHECKPOINT_PATH/cifar10_oe_udg_udg_e100_lr0.1_default \
    --postprocessor msp \
    --save-score --save-csv

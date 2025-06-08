@@ -16,6 +16,6 @@ python main.py \
     --num_workers 8 \
     --network.backbone.name resnet18_224x224 \
     --network.backbone.pretrained True \
-    --network.backbone.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_resnet18_224x224_base_e90_lr0.1_default/s${SEED}/best.ckpt \
+    --network.backbone.checkpoint $YOUR_CHECKPOINT_PATH/imagenet200_resnet18_224x224_base_e90_lr0.1_default/s${SEED}/best.ckpt \
     --evaluator.ood_scheme ${SCHEME} \
     --seed ${SEED}

@@ -21,7 +21,7 @@ python main.py \
     configs/imb_subset/train/train_lt100.yml \
     configs/imb_subset/test_keep_original.yml \
     --num_workers 8 \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
     --mark 0 \
     --postprocessor.postprocessor_args.dim 256
 
@@ -33,7 +33,7 @@ python main.py \
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar10 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e100_lr0.1_default \
+   --root $YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e100_lr0.1_default \
    --postprocessor vim \
    --save-score --save-csv \
    --train_subset_config ./configs/imb_subset/train_keep_original.yml \

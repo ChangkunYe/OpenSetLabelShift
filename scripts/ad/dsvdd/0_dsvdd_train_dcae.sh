@@ -20,4 +20,4 @@ configs/postprocessors/msp.yml \
 --recorder.name ad \
 --optimizer.num_epochs 2 \
 --network.pretrained True \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_dcae_dsvdd_e3/best.ckpt'
+--network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar10_dcae_dsvdd_e3/best.ckpt'

@@ -43,5 +43,5 @@ configs/preprocessors/base_preprocessor.yml \
 configs/postprocessors/temperature_scaling.yml \
 --num_workers 8 \
 --mark 0 \
---network.checkpoint /data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e100_lr0.1/best.ckpt \
+--network.checkpoint $YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e100_lr0.1/best.ckpt \
 --exp_name cifar10_resnet18_32x32_base_e100_lr0.1_test_fsood_temperature_scaling

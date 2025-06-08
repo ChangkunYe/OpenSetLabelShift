@@ -2,4 +2,4 @@ preprocessor:
   name: draem
   preprocessor_args:
     image_size: 256
-    anomaly_source: /data2/u6469845/Data/images_classic/texture
+    anomaly_source: $YOUR_DATASET_PATH/images_classic/texture

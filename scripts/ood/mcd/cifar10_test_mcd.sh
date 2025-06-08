@@ -15,6 +15,6 @@ python main.py \
     configs/postprocessors/mcd.yml \
     --network.backbone.name resnet18_32x32 \
     --network.pretrained True \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_oe_mcd_mcd_e100_lr0.1_default/s0/last_epoch100_acc0.9420.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar10_oe_mcd_mcd_e100_lr0.1_default/s0/last_epoch100_acc0.9420.ckpt' \
     --num_workers 8 \
     --seed 0

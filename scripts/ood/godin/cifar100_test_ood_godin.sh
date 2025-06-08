@@ -20,7 +20,7 @@ python main.py \
     configs/postprocessors/godin.yml \
     --network.backbone.name resnet18_32x32 \
     --num_workers 8 \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_godin_net_godin_e100_lr0.1_default/s0/best.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar100_godin_net_godin_e100_lr0.1_default/s0/best.ckpt' \
     --merge_option merge
 
 ############################################
@@ -31,6 +31,6 @@ python main.py \
 # multiple runs
 # python scripts/eval_ood.py \
 #   --id-data cifar100 \
-#    --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_godin_net_godin_e100_lr0.1_default \
+#    --root $YOUR_CHECKPOINT_PATH/cifar100_godin_net_godin_e100_lr0.1_default \
 #   --postprocessor godin \
 #   --save-score --save-csv

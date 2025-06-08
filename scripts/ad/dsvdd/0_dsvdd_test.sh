@@ -17,4 +17,4 @@ configs/postprocessors/msp.yml \
 --postprocessor.name dsvdd \
 --evaluator.name ood \
 --network.pretrained True \
---network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_dsvdd_e3/DSVDD_best_epoch2_roc_auc0.719908611111111.pth'
+--network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_dsvdd_e3/DSVDD_best_epoch2_roc_auc0.719908611111111.pth'

@@ -11,7 +11,7 @@
 # ood
 python scripts/eval_ood.py \
     --id-data imagenet200 \
-    --root /data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_resnet18_224x224_base_e90_lr0.1_default \
+    --root $YOUR_CHECKPOINT_PATH/imagenet200_resnet18_224x224_base_e90_lr0.1_default \
     --postprocessor vim \
     --save-score --save-csv  \
     --train_subset_config ./configs/imb_subset/train_keep_original.yml \
@@ -20,7 +20,7 @@ python scripts/eval_ood.py \
 # full-spectrum ood
 python scripts/eval_ood.py \
     --id-data imagenet200 \
-    --root /data2/u6469845/LOGS/Baselines/OpenOOD/imagenet200_resnet18_224x224_base_e90_lr0.1_default \
+    --root $YOUR_CHECKPOINT_PATH/imagenet200_resnet18_224x224_base_e90_lr0.1_default \
     --postprocessor vim \
     --save-score --save-csv --fsood \
     --train_subset_config ./configs/imb_subset/train_keep_original.yml \

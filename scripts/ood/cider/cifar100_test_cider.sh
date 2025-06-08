@@ -9,6 +9,6 @@
 # multiple runs
 python scripts/eval_ood.py \
    --id-data cifar100 \
-   --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar100_cider_net_cider_e100_lr0.5_protom0.5_default \
+   --root $YOUR_CHECKPOINT_PATH/cifar100_cider_net_cider_e100_lr0.5_protom0.5_default \
    --postprocessor cider \
    --save-score --save-csv

@@ -19,7 +19,7 @@ python main.py \
     configs/preprocessors/base_preprocessor.yml \
     configs/postprocessors/ebo.yml \
     --num_workers 8 \
-    --network.checkpoint '/data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
+    --network.checkpoint '$YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e100_lr0.1_default/s0/best.ckpt' \
     --mark 1 \
     --postprocessor.postprocessor_args.temperature 1
 
@@ -31,6 +31,6 @@ python main.py \
 # multiple runs
 python scripts/eval_ood.py \
     --id-data cifar10 \
-    --root /data2/u6469845/LOGS/Baselines/OpenOOD/cifar10_resnet18_32x32_base_e100_lr0.1_default \
+    --root $YOUR_CHECKPOINT_PATH/cifar10_resnet18_32x32_base_e100_lr0.1_default \
     --postprocessor ebo \
     --save-score --save-csv
