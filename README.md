@@ -21,6 +21,8 @@ as well as the OpenOOD paper:
   year={2023}
 }
 ```
+and other OOD detection papers if you are comparing with.
+
 If you are only interest in the proposed Open Set Label Shift estimation and correction algorithm. The implementation is provided in "OpenSetLabelShift/openood/label_shift/".
 ## Requirements
 
@@ -54,7 +56,7 @@ To test existing models' performance under label shift, adjust the dataset path 
 ```
 bash ./test_OSLS.sh
 ```
-
+The performance will be printed. Import performance will be recorded in "./results/ood/".
 
 
 ## License
@@ -62,3 +64,5 @@ Please see LICENSE and LICENSE-openood
 
 ## Questions
 Please raise issues or contact author at changkun.ye@anu.edu.au.
+
+P.S. Please also consider checking issues in the OpenOOD project at https://github.com/Jingkang50/OpenOOD.
