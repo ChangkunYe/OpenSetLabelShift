@@ -60,5 +60,5 @@ bash ./test_batch.sh
 ## License
 Please see LICENSE and LICENSE-openood
 
-## Questions?
-Pleas raise issues or contact author at changkun.ye@anu.edu.au.
+## Questions
+Please raise issues or contact author at changkun.ye@anu.edu.au.
