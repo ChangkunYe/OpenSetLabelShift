@@ -147,6 +147,7 @@ dmypy.json
 
 # macos files
 .DS_Store
+.idea
 
 # check format
 .isort.cfg
