@@ -38,6 +38,12 @@ conda install -c conda-forge cvxpy
 ### Dataset Preparation
 Please use bash scripts in "./script/download/" to download the dataset and checkpoints.
 
+### Dataset and Checkpoint Path setup
+After download the checkpoints and datasets, please find and replace across the entire project with:
+
+1. Replace "$YOUR_DATASET_PATH" with the actual dataset path you used locally
+2. Replace "$YOUR_CHECKPOINT_PATH" with the actual checkpoint path you used locally
+
 ## Train In-Distribution (ID) Classifiers
 Please adjust the bash script in "./script/basics/$DATASET/train-**.sh" and train your desired classifier
 When train the Neural Network classifier from scratch, the recommended hardware setup is as follows:
