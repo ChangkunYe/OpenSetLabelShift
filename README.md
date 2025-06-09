@@ -1,5 +1,7 @@
 # Open Set Label Shift with Test Time Out-of-Distribution Reference
-This is the official implementation for CVPR 2025 paper "Open Set Label Shift with Test Time Out-of-Distribution Reference". Paper link is [here](https://openaccess.thecvf.com/content/CVPR2025/papers/Ye_Open_Set_Label_Shift_with_Test_Time_Out-of-Distribution_Reference_CVPR_2025_paper.pdf).
+This is the official implementation for CVPR 2025 paper "Open Set Label Shift with Test Time Out-of-Distribution Reference". 
+
+Paper link: [Main Paper PDF](https://openaccess.thecvf.com/content/CVPR2025/papers/Ye_Open_Set_Label_Shift_with_Test_Time_Out-of-Distribution_Reference_CVPR_2025_paper.pdf), [Supplementary PDF](https://openaccess.thecvf.com/content/CVPR2025/supplemental/Ye_Open_Set_Label_CVPR_2025_supplemental.pdf), [Youtube Video](https://www.youtube.com/watch?v=spmaOwAhVVk).
 
 The project is established largely on the [OpenOOD 1.5 project](https://github.com/Jingkang50/OpenOOD) publicly available.
 If you find this repository useful or use this code in your research, please cite the following paper(s): 
