@@ -5,7 +5,7 @@ from .metrics import get_ls_metrics
 
 def owls_estimation(fx: np.ndarray, hx: np.ndarray, c: np.ndarray, rho_s: float,
                     fx_s: np.ndarray = None, hx_s: np.ndarray = None,
-                    mode: str = 'MLE'):
+                    mode: str = 'MLE') -> (np.ndarray, float):
     r"""
     Open World Label Shift Estimation (function implementation)
     Args:
@@ -73,8 +73,9 @@ def owls_correction(fx_tilde: np.ndarray, pi_tilde: np.ndarray, c_tilde: np.ndar
     return probs
 
 
-# Get rho_s
-def ls_retrieval(hx_s_id, hx_refer_ood):
+# Get source domain ID data ratio p_s(b=1)=rho_s
+def rho_s_retrieval(hx_s_id: np.ndarray,
+                    hx_refer_ood: np.ndarray) -> float:
     r"""
     Source ID data ratio rho_s retrieval model
     Args:
@@ -84,34 +85,34 @@ def ls_retrieval(hx_s_id, hx_refer_ood):
         rho_s:          Source ID data ratio
 
     """
-    sigma_0 = hx_refer_ood.mean()
-    # sigma_0 = np.clip((sigma_0 + 0.9), 0, 0.95)
-    sigma_1 = hx_s_id.mean()
-    print("sigma 0: {:.2f}, sigma 1: {:.2f}".format(sigma_0, sigma_1))
-    return sigma_0 / (1 - sigma_1 + sigma_0)
+    mu_0 = hx_refer_ood.mean()
+    # mu_0 = np.clip((mu_0 + 0.9), 0, 0.95)
+    mu_1 = hx_s_id.mean()
+    print("sigma 0: {:.2f}, sigma 1: {:.2f}".format(mu_0, mu_1))
+    return mu_0 / (1 - mu_1 + mu_0)
 
 
 # Get corrected rho_t
-def rho_t_correction(rho_t: float, tpr_s: float, fpr_s: float = None):
+def rho_t_correction(rho_t: float, mu_1: float, mu_0: float = None):
     r"""
     Target ID data ratio calibration
     Args:
         rho_t:      Original prediction of rho_t with imperfect classifier h(x) != p_s(b=1|x)
-        tpr_s:      Average confidence of h(x) on source ID dataset
-        fpr_s:      Average confidence of h(x) on source (reference) OOD dataset
+        mu_1:       Average confidence of h(x) on source ID dataset
+        mu_0:       Average confidence of h(x) on source (reference) OOD dataset
 
     Returns:
         rho_t:      Calibrated p_t(ID) = rho_t
     """
-    # fpr_s = tpr_s / 2 if fpr_s is None else fpr_s
+    # mu_0 = mu_1 / 2 if mu_0 is None else mu_0
 
-    if abs(tpr_s - fpr_s) <= 1e-3:
-        # raise ValueError('TPR_s %.2f and FPR_s %.2f too close, method unstable.' % (tpr_s, fpr_s))
-        print('[warning] TPR_s %.2f and FPR_s %.2f too close, method unstable.' % (tpr_s, fpr_s))
+    if abs(mu_1 - mu_0) <= 1e-3:
+        # raise ValueError('mu_1 %.2f and mu_0 %.2f too close, method unstable.' % (mu_1, mu_0))
+        print('[warning] mu_1 %.2f and mu_0 %.2f too close, method unstable.' % (mu_1, mu_0))
 
-    result = (rho_t - fpr_s) / (tpr_s - fpr_s)
-    if fpr_s > tpr_s:
-        print("[warning] TPR < FPR, which suggests the OOD classifier need adjustment: "
+    result = (rho_t - mu_0) / (mu_1 - mu_0)
+    if mu_0 > mu_1:
+        print("[warning] mu_1 < mu_0, which suggests the OOD classifier need adjustment: "
               "change decision boundary.")
     return np.clip(result, 0, 1)
 

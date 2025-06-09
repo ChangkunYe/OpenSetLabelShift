@@ -68,7 +68,7 @@ The performance will be printed. Important performance will be recorded in "./re
 ## License
 Please see LICENSE and LICENSE-openood
 
-## Questions
-Please raise issues or contact author at changkun.ye@anu.edu.au.
+## Q \& A
+For other questions, please raise issues or contact author at changkun.ye@anu.edu.au.
 
 P.S. Please also consider checking issues in the OpenOOD project at https://github.com/Jingkang50/OpenOOD.
