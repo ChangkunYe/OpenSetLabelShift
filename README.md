@@ -40,6 +40,19 @@ conda install -c conda-forge cvxpy
 ### Dataset Preparation
 Please use bash scripts in "./script/download/" to download the dataset and checkpoints.
 
+#### Important: On Sept, 2025, we found that using "./script/download/download.py" to download datasets in "./Datasets" could encounter error:
+```
+FileNotFoundError: [Errno 2] No such file or directory: './Datasets/benchmark_imglist.zip'
+```
+This could be solved by rename the downloaded zip file
+```
+./Datasets/benchmark_imglist_legacy_without_imagenet-es.zip
+```
+as
+```
+./Datasets/benchmark_imglist.zip
+```
+
 ### Dataset and Checkpoint Path setup
 After download the checkpoints and datasets, please find and replace across the entire project with:
 
