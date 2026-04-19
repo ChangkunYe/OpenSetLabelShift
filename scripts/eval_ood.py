@@ -1,7 +1,6 @@
 import os, sys
 ROOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 sys.path.append(ROOT_DIR)
-DATA_DIR = '$YOUR_DATASET_PATH/'
 import numpy as np
 import pandas as pd
 import argparse
@@ -37,6 +36,7 @@ def update(d, u):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--root', required=True)
+parser.add_argument('--data-root', default='./data')
 parser.add_argument('--test_subset_config_path', default=None)
 parser.add_argument('--train_subset_config_path', default=None)
 parser.add_argument('--ood_ratio', type=float, default=None)
@@ -54,6 +54,7 @@ parser.add_argument('--fsood', action='store_true')
 args = parser.parse_args()
 
 root = args.root
+data_root = os.path.abspath(args.data_root)
 
 # Imbalance subset config path
 train_subset_path = args.train_subset_config_path
@@ -174,12 +175,11 @@ for subfolder in sorted(glob(os.path.join(root, 's*'))):
     net.cuda()
     net.eval()
 
-    print('***********', ROOT_DIR, DATA_DIR, os.path.join(ROOT_DIR, 'data'))
+    print('***********', ROOT_DIR, data_root, os.path.join(ROOT_DIR, 'data'))
     evaluator = Evaluator(
         net,
         id_name=args.id_data,  # the target ID dataset
-        # data_root=os.path.join(DATA_DIR, 'data'),
-        data_root=DATA_DIR,
+        data_root=data_root,
         config_root=os.path.join(ROOT_DIR, 'configs'),
         preprocessor=None,  # default preprocessing
         postprocessor_name=postprocessor_name,

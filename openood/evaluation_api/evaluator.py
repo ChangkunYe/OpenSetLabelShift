@@ -82,6 +82,7 @@ class Evaluator:
         """
         # check the arguments
         self.owls = None
+        self._owls_score_transform_warned = False
         if postprocessor_name is None and postprocessor is None:
             raise ValueError('Please pass postprocessor_name or postprocessor')
         if postprocessor_name is not None and postprocessor is not None:
@@ -180,6 +181,20 @@ class Evaluator:
         self.log_file = "./eval_%s_%s_%s_%s.txt" % \
                    (id_name, train_subset_config["name"], test_subset_config['name'],
                     test_subset_config['ood']['ratio'])
+
+    def _prepare_owls_scores(self, conf: np.ndarray, split_name: str):
+        conf = np.asarray(conf, dtype=np.float32)
+        shifted = conf + 1.0
+
+        if not self._owls_score_transform_warned:
+            print('[warning] Evaluator passes `1 + conf` into OWLS as h(x). This preserves the '
+                  'current implementation but does not guarantee a calibrated probability-like '
+                  'p(ID|x) required by the paper.')
+            self._owls_score_transform_warned = True
+
+        print('[diag][owls-input][{}] raw range [{:.4f}, {:.4f}], shifted range [{:.4f}, {:.4f}]'.format(
+            split_name, conf.min(), conf.max(), shifted.min(), shifted.max()))
+        return torch.Tensor(shifted)
 
     def _classifier_inference(self,
                               data_loader: DataLoader,
@@ -384,7 +399,8 @@ class Evaluator:
 
                 print("Performing Open Label Shift Evaluation on OOD dataset {}...".format(dataset_name))
                 self.owls.evaluation(self.net, dataset_name,
-                                     torch.Tensor(1 + id_conf), torch.Tensor(1 + ood_conf),
+                                     self._prepare_owls_scores(id_conf, 'target_id'),
+                                     self._prepare_owls_scores(ood_conf, 'target_ood_{}'.format(dataset_name)),
                                      id_data_loader=self.dataloader_dict['id']['test'],
                                      ood_data_loader=ood_dl,
                                      progress=progress)

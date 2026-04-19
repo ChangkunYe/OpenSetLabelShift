@@ -88,8 +88,20 @@ def rho_s_retrieval(hx_s_id: np.ndarray,
     mu_0 = hx_refer_ood.mean()
     # mu_0 = np.clip((mu_0 + 0.9), 0, 0.95)
     mu_1 = hx_s_id.mean()
-    print("sigma 0: {:.2f}, sigma 1: {:.2f}".format(mu_0, mu_1))
+    print("sigma 0: {:.2f}, sigma 1: {:.2f}, gap: {:.2f}".format(
+        mu_0, mu_1, mu_1 - mu_0))
     return mu_0 / (1 - mu_1 + mu_0)
+
+
+def ls_retrieval(hx_s_id: np.ndarray,
+                 hx_refer_ood: np.ndarray) -> float:
+    r"""
+    Backward-compatible alias for source ID ratio retrieval.
+
+    Historical callers import ``ls_retrieval`` from this module, while the
+    implementation was renamed to ``rho_s_retrieval``.
+    """
+    return rho_s_retrieval(hx_s_id, hx_refer_ood)
 
 
 # Get corrected rho_t
@@ -106,15 +118,22 @@ def rho_t_correction(rho_t: float, mu_1: float, mu_0: float = None):
     """
     # mu_0 = mu_1 / 2 if mu_0 is None else mu_0
 
-    if abs(mu_1 - mu_0) <= 1e-3:
+    gap = mu_1 - mu_0
+    if abs(gap) <= 1e-3:
         # raise ValueError('mu_1 %.2f and mu_0 %.2f too close, method unstable.' % (mu_1, mu_0))
         print('[warning] mu_1 %.2f and mu_0 %.2f too close, method unstable.' % (mu_1, mu_0))
 
-    result = (rho_t - mu_0) / (mu_1 - mu_0)
+    result = (rho_t - mu_0) / gap
     if mu_0 > mu_1:
         print("[warning] mu_1 < mu_0, which suggests the OOD classifier need adjustment: "
               "change decision boundary.")
-    return np.clip(result, 0, 1)
+    clipped = np.clip(result, 0, 1)
+    print("rho_t correction stats: rho_t0 {:.4f}, mu_1 {:.4f}, mu_0 {:.4f}, gap {:.4f}, "
+          "raw {:.4f}, clipped {:.4f}".format(rho_t, mu_1, mu_0, gap, result, clipped))
+    if abs(result - clipped) > 1e-8:
+        print('[warning] rho_t correction was clipped to [0, 1], which suggests the '
+              'current h(x) or pseudo-OOD calibration is inconsistent with the correction assumptions.')
+    return clipped
 
 
 

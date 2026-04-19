@@ -3,6 +3,9 @@ from typing import List
 from openood.label_shift.closed_set_label_shift.common import get_confusion_matrix, get_marginal
 import cvxpy as cp
 
+NEGATIVE_TOL = 1e-8
+MASS_TOL = 1e-12
+
 
 # Estimation of Target Label Distribution P(Y_t=i) via BBSE-------------------#
 def bbse(train_probs: np.ndarray,
@@ -60,22 +63,19 @@ def bbse(train_probs: np.ndarray,
     pzy = pzy.T / len(train_labels)
 
     qz = get_marginal(test_probs, cls_num, mode=qy_mode)
+    source_py = np.bincount(np.asarray(train_labels, dtype=np.int64),
+                            minlength=cls_num).astype(np.float64)
+    source_py = source_py / source_py.sum()
 
     # Solve the linear system
     if solver == 'npy':
         result = numpy_solve(pzy, qz)
     elif solver == 'cvxpy':
-        # Obtain source label distribution
-        pz = np.array(list(set(train_labels)))
-        pz = pz / pz.sum()
-        result = cvx_solve(pzy, qz, result_type="w", c=pz)
+        result = cvx_solve(pzy, qz, result_type="w", c=source_py)
     else:
         raise ValueError('solver have to be either "npy" or "cvxpy".')
 
-    # Clip and normalize the result.
-    if np.sum(result < 0) > 0:
-        print('[warning] Negative value exist in BBSE estimation of w, will be clip to 0')
-        result = np.clip(result, 0, None)
+    result = stabilize_w(result, source_py)
 
     return result
 
@@ -124,6 +124,23 @@ def numpy_solve(matrix, bias):
     return x
 
 
+def stabilize_w(w, source_py):
+    r"""
+    Project numerical solver output back to the feasible BBSE ratio set.
+    """
+    w = np.asarray(w, dtype=np.float64).reshape(-1)
+
+    if np.any(w < -NEGATIVE_TOL):
+        print('[warning] Negative value exist in BBSE estimation of w, will be clip to 0')
+
+    w = np.clip(w, 0.0, None)
+    mass = float(source_py @ w)
+    if mass <= MASS_TOL:
+        raise ValueError('BBSE estimation produced a degenerate w after stabilization.')
+
+    return w / mass
+
+
 def cvx_solve(matrix, bias, result_type: str = 'w', weighted: bool = False, c: np.ndarray = None):
     r"""
     Solve linear System with Cvxpy package, constraints: x >= 0 and np.sum(x) == 1
@@ -147,7 +164,9 @@ def cvx_solve(matrix, bias, result_type: str = 'w', weighted: bool = False, c: n
     cost = cp.sum_squares(matrix @ x - bias)
 
     prob = cp.Problem(cp.Minimize(cost), constraints)
-    prob.solve(solver=cp.OSQP, verbose=False)
-    # prob.solve(solver=cp.SCS, use_indirect=False)
+    try:
+        prob.solve(solver=cp.OSQP, verbose=False)
+    except cp.error.SolverError:
+        prob.solve(solver=cp.SCS, verbose=False)
 
     return x.value

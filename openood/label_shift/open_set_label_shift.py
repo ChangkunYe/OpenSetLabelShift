@@ -2,7 +2,7 @@ import numpy as np
 import torch
 from time import time
 from tqdm import tqdm
-from typing import Union, List, Any
+from typing import Union, List, Any, Dict
 from .em import owls_em
 from .metrics import get_ls_metrics, get_acc_metrics, acc_cal, get_mse
 from .logistic_regression import train_logistic_regression
@@ -43,13 +43,18 @@ class OpenSetLabelShift:
         self.train_cls_num_list = train_cls_num_list
         self.c = torch.Tensor(train_cls_num_list / train_cls_num_list.sum())
         self.T = T
+        self.diagnostics = {'source': {}, 'target': {}}
+        self._raw_score_warning_emitted = False
 
-        if (rescale == "threshold") or (rescale == "auto" and self.cls_num <= 100):
+        if (rescale == "logistic") or (rescale == "auto" and self.cls_num > 100):
             self.rescale_logistic = True
-        elif (rescale == 'logistic') or (rescale == "auto" and self.cls_num > 100):
+            self.rescale_mode = 'logistic'
+        elif (rescale == 'threshold') or (rescale == "auto" and self.cls_num <= 100):
             self.rescale_logistic = False
+            self.rescale_mode = 'threshold'
         else:
             raise ValueError("[warning] rescale should be either 'threshold', 'logistic' or 'auto'.")
+        print('Using {} rescale for {} classes.'.format(self.rescale_mode, self.cls_num))
 
 
         # Inference Source ID data and Source pseudo OOD data
@@ -65,7 +70,19 @@ class OpenSetLabelShift:
         if h:
             ref_id_pred, hx_s_id, ref_id_gt = h(f, s_id_dataloader, progress)
             fake_ood_pred, hx_s_ood, fake_ood_gt = h(f, s_ood_dataloader, progress)
-            hx_s_id, hx_s_ood = torch.Tensor(1 + hx_s_id), torch.Tensor(1 + hx_s_ood)
+            raw_hx_s_id = torch.Tensor(hx_s_id)
+            raw_hx_s_ood = torch.Tensor(hx_s_ood)
+            self._warn_raw_ood_score_usage('source', raw_hx_s_id, raw_hx_s_ood)
+            self._record_score_diagnostics('source', 'raw_postprocessor', raw_hx_s_id, raw_hx_s_ood)
+
+            hx_s_id, hx_s_ood = raw_hx_s_id + 1, raw_hx_s_ood + 1
+            self._record_score_diagnostics(
+                'source',
+                'shifted_for_owls',
+                hx_s_id,
+                hx_s_ood,
+                self.source_id_labels,
+            )
             self.hx_s = torch.cat((hx_s_id, hx_s_ood))
         else:
             raise ValueError("OOD classifier is required.")
@@ -83,19 +100,28 @@ class OpenSetLabelShift:
         # self._compute_scale_thresholding(hx_s_id, hx_s_ood)  # statistical median based approach
         # self._compute_scale_logistic(hx_s_id, hx_s_ood) # logistic regression based approach
         if self.rescale_logistic:
-            self._compute_scale_thresholding(hx_s_id, hx_s_ood)
-        else:
             self._compute_scale_logistic(hx_s_id, hx_s_ood)
+        else:
+            self._compute_scale_thresholding(hx_s_id, hx_s_ood)
 
         print('Estimation threshold is {:.2f}'.format(self.mid))
         # Source domain OOD classifier TPR, FPR evaluation
-        self.sigma_1, self.sigma_0 = self._rescale(hx_s_id).mean(), self._rescale(hx_s_ood).mean()
+        source_rescaled_id = self._rescale(hx_s_id)
+        source_rescaled_ood = self._rescale(hx_s_ood)
+        self.sigma_1, self.sigma_0 = source_rescaled_id.mean(), source_rescaled_ood.mean()
         # Source ID data ratio retrival
-        self.rho_s = ls_retrieval(self._rescale(hx_s_id), self._rescale(hx_s_ood) / self.T)
+        self.rho_s = ls_retrieval(source_rescaled_id, source_rescaled_ood / self.T)
         print("[Rescaled] Train ID median: {:.2f}, Train ID mean: {:.2f}, "
               "Pseudo OOD median: {:.2f}, Pseudo ood mean: {:.2f}".format(
-            self._rescale(hx_s_id).median(), self._rescale(hx_s_id).mean(),
-            self._rescale(hx_s_ood).median(), self._rescale(hx_s_ood).mean()))
+            source_rescaled_id.median(), source_rescaled_id.mean(),
+            source_rescaled_ood.median(), source_rescaled_ood.mean()))
+        self._record_score_diagnostics(
+            'source',
+            'rescaled',
+            source_rescaled_id,
+            source_rescaled_ood,
+            self.source_id_labels,
+        )
 
         # Source ID + OOD label distribution
         self.c_tilde = torch.cat((self.c * self.rho_s, torch.Tensor([1 - self.rho_s])))
@@ -117,6 +143,112 @@ class OpenSetLabelShift:
         else:
             result = (x > self.mid).to(torch.float)
         return result
+
+    def _summary_stats(self, x: torch.Tensor) -> Dict[str, float]:
+        values = x.detach().cpu().to(torch.float)
+        return {
+            'min': float(values.min()),
+            'max': float(values.max()),
+            'mean': float(values.mean()),
+            'median': float(values.median()),
+            'std': float(values.std(unbiased=False)) if len(values) > 1 else 0.0,
+        }
+
+    def _classwise_mean_summary(self, values: torch.Tensor,
+                                labels: torch.Tensor) -> Dict[str, float]:
+        values = values.detach().cpu().to(torch.float)
+        labels = labels.detach().cpu().to(torch.int64)
+        class_means = []
+        for cls in torch.unique(labels):
+            cls_idx = int(cls.item())
+            if cls_idx < 0 or cls_idx >= self.cls_num:
+                continue
+            mask = labels == cls
+            if mask.any():
+                class_means.append(float(values[mask].mean()))
+
+        if not class_means:
+            return {}
+
+        class_means = np.asarray(class_means, dtype=np.float64)
+        return {
+            'class_count': int(len(class_means)),
+            'min': float(class_means.min()),
+            'max': float(class_means.max()),
+            'mean': float(class_means.mean()),
+            'std': float(class_means.std()),
+        }
+
+    def _record_score_diagnostics(self,
+                                  split_name: str,
+                                  stage_name: str,
+                                  id_scores: torch.Tensor,
+                                  ood_scores: torch.Tensor,
+                                  id_labels: torch.Tensor = None):
+        id_stats = self._summary_stats(id_scores)
+        ood_stats = self._summary_stats(ood_scores)
+        stage = {
+            'id': id_stats,
+            'ood': ood_stats,
+            'mean_gap': id_stats['mean'] - ood_stats['mean'],
+        }
+        if id_labels is not None:
+            classwise = self._classwise_mean_summary(id_scores, id_labels)
+            if classwise:
+                stage['id_classwise_mean'] = classwise
+
+        self.diagnostics.setdefault(split_name, {})[stage_name] = stage
+        print('[diag][{}][{}] ID mean {:.4f}, OOD mean {:.4f}, gap {:.4f}'.format(
+            split_name, stage_name, id_stats['mean'], ood_stats['mean'], stage['mean_gap']))
+        if 'id_classwise_mean' in stage:
+            classwise = stage['id_classwise_mean']
+            print('[diag][{}][{}] ID classwise mean min {:.4f}, max {:.4f}, std {:.4f} across {} classes'.format(
+                split_name,
+                stage_name,
+                classwise['min'],
+                classwise['max'],
+                classwise['std'],
+                classwise['class_count']))
+
+    def _warn_raw_ood_score_usage(self, split_name: str,
+                                  id_scores: torch.Tensor,
+                                  ood_scores: torch.Tensor):
+        if self._raw_score_warning_emitted:
+            return
+
+        min_score = float(torch.min(torch.cat((id_scores, ood_scores))))
+        max_score = float(torch.max(torch.cat((id_scores, ood_scores))))
+        if min_score < 0.0 or max_score > 1.0:
+            print('[warning] {} OOD score range [{:.4f}, {:.4f}] is not probability-like. '
+                  'Current OWLS implementation still shifts scores with `1 + conf` before rescaling, '
+                  'which differs from the paper assumption h(x) ~= p(ID|x) in [0, 1].'.format(
+                      split_name, min_score, max_score))
+        else:
+            print('[warning] {} OOD scores are treated as h(x) via `1 + conf` before rescaling. '
+                  'Even when the raw score falls in [0, 1], this code path is still a heuristic '
+                  'approximation of the paper assumption.'.format(split_name))
+        self._raw_score_warning_emitted = True
+
+    def _record_rho_diagnostics(self):
+        rho_info = {
+            'rho_s': float(self.rho_s),
+            'rho_t0': float(self.rho_t0),
+            'rho_t': float(self.rho_t),
+            'rho_t_gt': float(self.rho_t_gt),
+            'sigma_1': float(self.sigma_1),
+            'sigma_0': float(self.sigma_0),
+            'sigma_0_adjusted': float(self.sigma_0 / self.T),
+        }
+        self.diagnostics.setdefault('target', {})['rho'] = rho_info
+        print('[diag][target][rho] rho_s {:.4f}, rho_t0 {:.4f}, rho_t {:.4f}, gt {:.4f}, '
+              'sigma_1 {:.4f}, sigma_0 {:.4f}, sigma_0/T {:.4f}'.format(
+                  rho_info['rho_s'],
+                  rho_info['rho_t0'],
+                  rho_info['rho_t'],
+                  rho_info['rho_t_gt'],
+                  rho_info['sigma_1'],
+                  rho_info['sigma_0'],
+                  rho_info['sigma_0_adjusted']))
 
     def _separation_check(self, hx_s_id: torch.Tensor, hx_s_ood: torch.Tensor,
                           std_num: float = 0, mode: str = 'median'):
@@ -294,12 +426,27 @@ class OpenSetLabelShift:
         # Rescaled hx for label shift correction task
         # hx_rescaled = self._correction_rescale(hx)
         hx_rescaled = self._rescale(hx)
+        self._record_score_diagnostics(
+            'target',
+            'shifted_for_owls',
+            hx_id,
+            hx_ood,
+            self.target_cls_labels['id'],
+        )
+        self._record_score_diagnostics(
+            'target',
+            'rescaled',
+            hx_rescaled[:len(hx_id)],
+            hx_rescaled[len(hx_id):],
+            self.target_cls_labels['id'],
+        )
         # Construct the fx_tilde for K+1 classes of ID & OOD
         fx_tilde = torch.cat((fx * hx_rescaled.unsqueeze(-1), 1 - hx_rescaled.unsqueeze(-1)), axis=-1)
 
         # Open World Label Shift Estimation of pi, rho_t
         c_t = time()
         self.estimation(fx, hx_rescaled, mode=mode)
+        self._record_rho_diagnostics()
         print("Estimation time %.4f" % (time() - c_t))
         # Open World Label Shift Correction of predictions
         new_fx_tilde = self.correction(fx, hx_rescaled)
