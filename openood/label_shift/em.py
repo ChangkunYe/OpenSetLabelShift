@@ -82,8 +82,11 @@ def owls_em(fx: np.ndarray,
     elif estimate == "MAP":
         print("Estimation model is MAP, prior alpha_i, alpha_o are either given or "
               "learned with divergence type {}.".format(dvg_name))
+        print('[warning] Current MAP path uses a learned ID prior and a neutral OOD prior. '
+              'This is a heuristic approximation of OSLS-MAP and may not exactly match the '
+              'paper\'s Beta/Dirichlet formulation.')
         fx_s_tilde = np.concatenate((fx_s * hx_s[..., None], 1 - hx_s[..., None]), axis=-1)
-        alpha_o = (np.ones(2), 1) if alpha_o is None else alpha_o
+        alpha_o = (np.ones(2) / 2, 1) if alpha_o is None else alpha_o
         alpha_i = get_id_prior(fx_s_tilde, c_tilde, dvg=dvg, max_iter=max_iter) if alpha_i is None else alpha_i
         # print('Prior parameters alpha_i, alpha_o are: {}, {}'.format(str(alpha_i), str(alpha_o)))
 
